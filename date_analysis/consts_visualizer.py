@@ -43,5 +43,5 @@ MEAN_NAMES_YOLK = {
     "pz": [r"p\dz-p\d"],
     "smz": [r"sm\dz-p\d"],
     "svz": [r"sv\dz-p\d"],
-    # "sz": [r"s\dz-p\d"]
+    "sz": [r"s\dz-p\d"]
 }

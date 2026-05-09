@@ -57,7 +57,7 @@ def make_changed_mask(x):
 def interesting_peak(x):
     return (x >= 1420) & (x <= 1480)
 
-def metrics(data, name) -> pd.DataFrame:
+def metrics(data, data_average, name) -> pd.DataFrame:
     interest_space = data_average[interesting_peak(data_average["Raman_shift"])]
     peak = data_average.loc[interest_space["CCD_res_mean"].idxmax()]
     areas = []
@@ -120,7 +120,7 @@ if __name__ == "__main__":
         except:
             print(name, len(data))
         
-        res_alb = pd.concat([res_alb, metrics(data, name)], ignore_index=True)
+        res_alb = pd.concat([res_alb, metrics(data, data_average, name)], ignore_index=True)
     
     plot_mean_graphs(
         "Albumin",
@@ -145,8 +145,9 @@ if __name__ == "__main__":
 
         data = give_data_for_averaging(
             MEAN_NAMES_YOLK[name],
-            norm_mode="peak",
-            mask=make_changed_mask,
+            norm_mode="none",
+            mask=None,
+            # mask=make_changed_mask,
             left=1600,
             right=1800,
             center=1655,
@@ -169,7 +170,7 @@ if __name__ == "__main__":
         except:
             print(name, len(data))
         
-        res_yolk = pd.concat([res_yolk, metrics(data, name)], ignore_index=True)
+        res_yolk = pd.concat([res_yolk, metrics(data, data_average, name)], ignore_index=True)
 
     plot_mean_graphs(
         "Yolk",
@@ -178,5 +179,15 @@ if __name__ == "__main__":
         y_col="CCD_res_mean",
         SUB_DIR="mean"
     )
+
+    left_b = 1000
+    right_b = 1200
+
+    data_av = datas[0][0]
+    peak = data_av.loc[data_av["CCD_res_mean"][(data_av["Raman_shift"] <= right_b) & (data_av["Raman_shift"] >= left_b)].idxmax()]
+    print(f"left={left_b},",
+          f"right={right_b},",
+          f"center={round(peak["Raman_shift"])},",
+          sep="\n" + " " * 12)
 
     print(res_yolk)
