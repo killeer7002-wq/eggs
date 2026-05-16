@@ -19,6 +19,19 @@ COLORS = {
     "sz": "royalblue",
 }
 
+CODE_TO_NAME = {
+    "kb": "Hard-Boiled",
+    "smb": "Soft-boiled",
+    "pb": "Periodic",
+    "svb": "Sous vide",
+    "sb": "Raw",
+    "kz": "Hard-Boiled",
+    "smz": "Soft-boiled",
+    "pz": "Periodic",
+    "svz": "Sous vide",
+    "sz": "Raw",
+}
+
 NAMES = []
 MEAN_NAMES = {
     "kb": [r"k\db-p\d"],
@@ -36,12 +49,12 @@ MEAN_NAMES_ALBUMIN = {
     "pb": [r"p\db-p\d"],
     "smb": [r"sm\db-p\d"],
     "svb": [r"sv\db-p\d"],
-    "sb": [r"s\db-p\d"],
+    # "sb": [r"s\db-p\d"],
 }
 MEAN_NAMES_YOLK = {
     "kz": [r"k\dz-p\d"],
     "pz": [r"p\dz-p\d"],
     "smz": [r"sm\dz-p\d"],
     "svz": [r"sv\dz-p\d"],
-    "sz": [r"s\dz-p\d"]
+    # "sz": [r"s\dz-p\d"]
 }

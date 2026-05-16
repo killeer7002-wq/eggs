@@ -127,7 +127,8 @@ if __name__ == "__main__":
         datas,
         x_col="Raman_shift",
         y_col="CCD_res_mean",
-        SUB_DIR="mean"
+        SUB_DIR="mean",
+        title="Albumin"
     )
 
     print(res_alb)
@@ -145,7 +146,7 @@ if __name__ == "__main__":
 
         data = give_data_for_averaging(
             MEAN_NAMES_YOLK[name],
-            norm_mode="none",
+            norm_mode="peak",
             mask=None,
             # mask=make_changed_mask,
             left=1600,
@@ -177,7 +178,8 @@ if __name__ == "__main__":
         datas,
         x_col="Raman_shift",
         y_col="CCD_res_mean",
-        SUB_DIR="mean"
+        SUB_DIR="mean",
+        title="Yolk"
     )
 
     left_b = 1000

@@ -173,16 +173,22 @@ def plot_once_graph(
         fig, ax1 = plt.subplots(1, 1, figsize=(10, 6))
 
         ax1.plot(data["Raman_shift"], data["CCD_res"], "", color="royalblue")
+    
+    ax1.set_xlabel(r"Raman Shift, $cm^{-1}$")
+    ax1.set_ylabel(r"Normalize CCD")
 
     GRAPH_PATH.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(GRAPH_PATH)
     return data
 
-def plot_mean_graph(NAME: str,
-                    data: pd.DataFrame,
-                    x_col="Raman_shift",
-                    y_col="CCD",
-                    SUB_DIR: str="") -> pd.DataFrame:
+def plot_mean_graph(
+        NAME: str,
+        data: pd.DataFrame,
+        x_col="Raman_shift",
+        y_col="CCD",
+        SUB_DIR: str="",
+        title: str | None=None
+) -> pd.DataFrame:
     NAME_GRAPH = NAME + ".png"
     GRAPH_PATH = DIR_GRAPHS
     if SUB_DIR != "":
@@ -190,8 +196,13 @@ def plot_mean_graph(NAME: str,
     GRAPH_PATH /= NAME_GRAPH
 
     fig, ax1 = plt.subplots(1, 1, figsize=(10, 6))
+    if title != None:
+        fig.suptitle(title)
 
     ax1.plot(data[x_col], data[y_col], "", color="royalblue")
+
+    ax1.set_xlabel(r"Raman Shift, $cm^{-1}$")
+    ax1.set_ylabel(r"Normalize CCD")
 
     GRAPH_PATH.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(GRAPH_PATH)
@@ -202,7 +213,8 @@ def plot_mean_graphs(
         datas,
         x_col="Raman_shift",
         y_col="CCD",
-        SUB_DIR: str=""
+        SUB_DIR: str="",
+        title: str | None=None
 ):
     NAME_GRAPH = NAME + ".png"
     GRAPH_PATH = DIR_GRAPHS
@@ -210,9 +222,14 @@ def plot_mean_graphs(
         GRAPH_PATH /= SUB_DIR
     GRAPH_PATH /= NAME_GRAPH
     fig, ax1 = plt.subplots(1, 1, figsize=(10, 6))
+    if title != None:
+        fig.suptitle(title)
     for i in datas:
-        ax1.plot(i[0][x_col], i[0][y_col], label=i[1], color=COLORS[i[1]])
+        ax1.plot(i[0][x_col], i[0][y_col], label=CODE_TO_NAME[i[1]], color=COLORS[i[1]])
     
+    ax1.set_xlabel(r"Raman Shift, $cm^{-1}$")
+    ax1.set_ylabel(r"Normalize CCD")
+
     GRAPH_PATH.parent.mkdir(parents=True, exist_ok=True)
     ax1.legend()
     fig.savefig(GRAPH_PATH)
